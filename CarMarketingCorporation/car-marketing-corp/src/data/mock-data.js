@@ -17,10 +17,12 @@ const sortBy = [
     {
         id: 1,
         name: "Title"
-    }, {
+    },
+    {
         id: 2,
         name: "Description"
-    }, {
+    },
+    {
         id: 3,
         name: "Launch Date"
     }
@@ -76,3 +78,5 @@ const carList = [
         launchDate: new Date(2018, 2, 1)
     }
 ]
+
+export default brandList;
