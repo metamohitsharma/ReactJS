@@ -1,4 +1,4 @@
-import Header from './components/header/logo'
+import Header from './components/header/index'
 import React from 'react';
 import ReactDOM from 'react-dom';
 
