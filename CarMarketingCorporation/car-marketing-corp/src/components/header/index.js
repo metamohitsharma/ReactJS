@@ -1,7 +1,7 @@
-import Brand from './brand';
+import Brand from './brand'
 import './index.css'
-import Logo from './logo';
-import React from 'react';
+import Logo from './logo'
+import React from 'react'
 
 export default class Header extends React.Component {
     render() {
