@@ -1,5 +1,5 @@
 import Car from '../car/index'
-import { carList, metaData } from '../../data/mock-data'
+import { brandList, carList, metaData } from '../../data/mock-data'
 import { Col, Grid, Row, Table } from 'react-bootstrap'
 import SearchPage from './search'
 import SortBy from './sort-by'
@@ -7,6 +7,9 @@ import React from 'react'
 
 export default class Body extends React.Component {
     render() {
+        const brandOpted = brandList.find((brand) =>
+            brand.name === this.props.selectedBrand)
+        const selectedCars = carList.filter(car => car.brandId === brandOpted.id)
         return (
             <Grid>
                 <Row>
@@ -26,11 +29,15 @@ export default class Body extends React.Component {
                                     <th>{metaData.car.title.label}</th>
                                     <th>{metaData.car.description.label}</th>
                                     <th>{metaData.car.launchDate.label}</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {carList.map(
-                                    (car, i) => <Car carList={car} />)}
+                                {selectedCars.map(
+                                    (car, i) =>
+                                        <Car
+                                            carList={car}
+                                            brand={this.props.selectedBrand} />)}
                             </tbody>
                         </Table>
                     </Col>

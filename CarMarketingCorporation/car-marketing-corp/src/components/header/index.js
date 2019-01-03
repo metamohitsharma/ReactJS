@@ -8,11 +8,13 @@ export default class Header extends React.Component {
         return (
             <Grid className="show-grid">
                 <Row>
-                    <Col md={10} >
+                    <Col md={6} >
                         <Logo />
                     </Col>
-                    <Col md={2} >
-                        <Brand />
+                    <Col md={3} mdOffset='3'>
+                        <Brand
+                            selectedBrand={this.props.selectedBrand}
+                            onBrandChange={this.props.onBrandChange} />
                     </Col>
                 </Row>
             </Grid>
