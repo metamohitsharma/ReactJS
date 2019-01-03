@@ -34,7 +34,7 @@ const carList = [
         id: 1,
         brandId: 1,
         img: baseImage,
-        title: "I10",
+        title: "I 10",
         description: "HatchBack",
         launchDate: new Date(2016, 11, 11)
     },

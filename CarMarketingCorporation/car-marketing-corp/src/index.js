@@ -5,9 +5,14 @@ import ReactDOM from 'react-dom'
 
 
 ReactDOM.render(
-    <div>
-        <Header />
-        <Body />
+    <div className="container">
+        <div>
+            <Header />
+            <hr />
+        </div>
+        <div>
+            <Body />
+        </div>
     </div>,
     document.getElementById('root')
 );

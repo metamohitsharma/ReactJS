@@ -1,36 +1,24 @@
-import './index.css'
-import { metaData } from '../../data/mock-data'
+import Moment from 'react-moment'
 import React from 'react'
 
 export default class Car extends React.Component {
     render() {
         const carList = this.props.carList
         return (
-            <div className="car">
-                <div className="car-header">
-                    <img src={'data:image/png;base64, ' + carList.img} />
-                </div>
-                <div className="car-header">
-                    <div>
-                        <p>
-                            <span>{metaData.car.title.label} :- </span>
-                            <span>{carList.title}</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span>{metaData.car.description.label} :- </span>
-                            <span>{carList.description}</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <span>{metaData.car.launchDate.label} :- </span>
-                            <span>{carList.launchDate.toString()}</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <tr>
+                <td>
+                    <img src={'data:image/png;base64, ' + carList.img} alt="Not Found" height='200' />
+                </td>
+                <td>{carList.title}
+                </td>
+                <td>{carList.description}</td>
+                <td>
+                    <Moment
+                        format="MM-DD-YYYY">
+                        {carList.launchDate.toString()}
+                    </Moment>
+                </td>
+            </tr>
         )
     }
 }
