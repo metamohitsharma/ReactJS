@@ -27,10 +27,10 @@ export default class Car extends React.Component {
                 <td>
                     <img src={'data:image/png;base64, ' + carList.img} alt="Not Found" height='200' />
                 </td>
-                <td>{carList.title}
-                </td>
-                <td>{carList.description}</td>
                 <td>
+                    <b>{metaData.car.title.label}</b>: {carList.title} <br />
+                    <b>{metaData.car.description.label}</b>: {carList.description} <br />
+                    <b>{metaData.car.launchDate.label}</b>:
                     <Moment
                         format="MM-DD-YYYY">
                         {carList.launchDate.toString()}

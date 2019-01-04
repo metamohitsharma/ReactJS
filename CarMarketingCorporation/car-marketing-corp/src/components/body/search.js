@@ -2,6 +2,10 @@ import { Col, InputGroup, Form, FormControl, FormGroup, Glyphicon } from 'react-
 import React from 'react'
 
 export default class SearchPage extends React.Component {
+
+    handleOnChangeSearch(event) {
+        this.props.onTitleToSearchChange(event.target.value)
+    }
     render() {
         return (
             <Col md='6'>
@@ -11,7 +15,8 @@ export default class SearchPage extends React.Component {
                             <InputGroup.Addon><Glyphicon glyph="search" /></InputGroup.Addon>
                             <FormControl
                                 type="text"
-                                placeholder="Search Here" />
+                                placeholder="Search Here"
+                                onChange={this.handleOnChangeSearch.bind(this)} />
                         </InputGroup>
                     </FormGroup>
                 </Form>

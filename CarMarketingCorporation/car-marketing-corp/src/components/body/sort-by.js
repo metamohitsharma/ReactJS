@@ -1,26 +1,8 @@
 import { Col, DropdownButton, MenuItem, Row } from 'react-bootstrap'
-import { sortBy } from '../../data/mock-data'
+import { sortBy, sortOrder } from '../../data/mock-data'
 import React from 'react'
 
-const sortOptions = sortBy.map((option) => option.name)
-const sortOrder = ['Ascending', 'Descending']
-
 export default class SortBy extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            selectedOption: sortOptions[0],
-            selectedOrder: sortOrder[0]
-        }
-    }
-
-    handleSort(eventKey, event) {
-        this.setState({ selectedOption: sortOptions[eventKey] })
-    }
-
-    handleOrder(eventKey, event) {
-        this.setState({ selectedOrder: sortOrder[eventKey] })
-    }
     render() {
         return (
             <Row>
@@ -29,16 +11,16 @@ export default class SortBy extends React.Component {
                     </Col>
                 <Col md='8'>
                     <DropdownButton
-                        title={this.state.selectedOption}
-                        onSelect={this.handleSort.bind(this)}>
+                        title={this.props.selectedSortBy}
+                        onSelect={this.props.onSortOptionChange}>
                         {sortBy.map(
                             (options, i) => <MenuItem key={i} eventKey={i}>{options.name}</MenuItem>)}
                     </DropdownButton>
                     <DropdownButton
-                        title={this.state.selectedOrder}
-                        onSelect={this.handleOrder.bind(this)}>
+                        title={this.props.selectedSortOrder}
+                        onSelect={this.props.onSortOrderChange}>
                         {sortOrder.map(
-                            (order, i) => <MenuItem key={i} eventKey={i}>{order}</MenuItem>)}
+                            (order, i) => <MenuItem key={i} eventKey={i}>{order.name}</MenuItem>)}
                     </DropdownButton>
                 </Col>
             </Row>
