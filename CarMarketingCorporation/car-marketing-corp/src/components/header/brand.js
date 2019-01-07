@@ -10,6 +10,7 @@ export default class Brand extends React.Component {
                 <span>Brand: </span>
                 <DropdownButton
                     title={this.props.selectedBrand}
+                    id={"Brands"}
                     onSelect={this.props.onBrandChange}>
                     {brandList.map(
                         (brand, i) => <MenuItem key={i} eventKey={i}>{brand.name}</MenuItem>)}

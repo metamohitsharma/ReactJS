@@ -6,17 +6,19 @@ export default class SortBy extends React.Component {
     render() {
         return (
             <Row>
-                <Col md='2'>
+                <Col md={2}>
                     Sort by
                     </Col>
-                <Col md='8'>
+                <Col md={8}>
                     <DropdownButton
+                        id={"SortBy"}
                         title={this.props.selectedSortBy}
                         onSelect={this.props.onSortOptionChange}>
                         {sortBy.map(
                             (options, i) => <MenuItem key={i} eventKey={i}>{options.name}</MenuItem>)}
                     </DropdownButton>
                     <DropdownButton
+                        id={"SortOrder"}
                         title={this.props.selectedSortOrder}
                         onSelect={this.props.onSortOrderChange}>
                         {sortOrder.map(

@@ -1,9 +1,10 @@
 import Car from '../car/index'
 import { brandList, carList, sortBy, sortOrder } from '../../data/mock-data'
 import { Col, Grid, Row, Table } from 'react-bootstrap'
+import React from 'react'
 import SearchPage from './search'
 import SortBy from './sort-by'
-import React from 'react'
+
 
 const sortByOptions = sortBy.map(
     (sortOptions) => sortOptions.name)
@@ -44,17 +45,30 @@ export default class Body extends React.Component {
         const selectedCars = sortedCarList
             .filter(car => car.brandId === brandOpted.id)
             .filter(car => car.title.toLowerCase().indexOf(this.state.searchBy) >= 0)
+        var carListToBeDisplayed
+        if (selectedCars.length === 0) {
+            carListToBeDisplayed = (
+                <p>No Car Found having Title "{this.state.searchBy}" :(</p>
+            )
+        } else {
+            carListToBeDisplayed = (
+                selectedCars.map(
+                    (car, i) =>
+                        <Car
+                            car={car} />)
+            )
+        }
         return (
             <Grid>
                 <Row>
-                    <Col md='6'>
+                    <Col md={6}>
                         <SortBy
                             selectedSortBy={this.state.sortBy}
                             selectedSortOrder={this.state.sortOrder}
                             onSortOptionChange={this.handleSortOptionChange.bind(this)}
                             onSortOrderChange={this.handleSortOrderChange.bind(this)} />
                     </Col>
-                    <Col md='4' mdOffset='2'>
+                    <Col md={4} mdOffset={2}>
                         <SearchPage
                             titleToSearchBy={this.state.searchBy}
                             onTitleToSearchChange={this.handleTitleToSearchChange.bind(this)} />
@@ -63,17 +77,11 @@ export default class Body extends React.Component {
                 <Row>
                     <Col>
                         <Table striped bordered condensed hover>
-                            <tbody>
-                                {selectedCars.map(
-                                    (car, i) =>
-                                        <Car
-                                            carList={car}
-                                            brand={this.props.selectedBrand} />)}
-                            </tbody>
+                            {carListToBeDisplayed}
                         </Table>
                     </Col>
                 </Row>
-            </Grid>
+            </Grid >
         )
     }
 }

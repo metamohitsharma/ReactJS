@@ -8,7 +8,7 @@ export default class SearchPage extends React.Component {
     }
     render() {
         return (
-            <Col md='6'>
+            <Col md={6}>
                 <Form>
                     <FormGroup >
                         <InputGroup>

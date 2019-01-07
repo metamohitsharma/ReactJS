@@ -1,6 +1,8 @@
 import Body from '../components/body/index'
 import { brandList } from '../data/mock-data'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from '../components/header/index'
+import { Info } from '../components/body/info'
 import React from 'react'
 
 const brands = brandList.map(
@@ -21,18 +23,28 @@ export class App extends React.Component {
     }
     render() {
         return (
-            <div className="container">
-                <div>
+            <div
+                className="container">
+                < div >
                     <Header
                         selectedBrand={this.state.selectedBrand}
                         onBrandChange={this.brandChange.bind(this)} />
                     <hr />
-                </div>
+                </div >
                 <div>
-                    <Body
-                        selectedBrand={this.state.selectedBrand} />
+                    <Router>
+                        <Switch>
+                            <Route exact path="/"
+                                render={(props) =>
+                                    <Body
+                                        selectedBrand={this.state.selectedBrand} {...props} />} />
+                            <Route
+                                path="/:id(\d+)"
+                                component={Info} />
+                        </Switch>
+                    </Router>
                 </div>
-            </div>
+            </div >
         )
     }
 }
