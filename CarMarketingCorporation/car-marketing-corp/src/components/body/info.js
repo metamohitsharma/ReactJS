@@ -1,6 +1,6 @@
 import { carList, metaData } from '../../data/mock-data'
 import Moment from 'react-moment'
-import { Table } from 'react-bootstrap'
+import { Image, Table } from 'react-bootstrap'
 import React from 'react'
 
 export class Info extends React.Component {
@@ -29,7 +29,10 @@ export class Info extends React.Component {
                 <tbody>
                     <tr>
                         <td>
-                            <img src={'data:image/png;base64, ' + car[0].img} alt="Not Found" height='200' />
+                            <Image
+                                src={'data:image/png;base64, ' + car[0].img}
+                                alt='Not Found'
+                                height='200' />
                         </td>
                         <td>
                             {car[0].title}
@@ -39,7 +42,7 @@ export class Info extends React.Component {
                         </td>
                         <td>
                             <Moment
-                                format="MM-DD-YYYY">
+                                format='MM-DD-YYYY'>
                                 {car[0].launchDate.toString()}
                             </Moment>
                         </td>

@@ -23,18 +23,24 @@ export default class SortBy extends React.Component {
                     </Col>
                 <Col md={8}>
                     <DropdownButton
-                        id={"SortBy"}
+                        id={'SortBy'}
                         title={selectedSortByOption[0].name}
                         onSelect={this.props.onSortOptionChange}>
-                        {sortBy.map(
-                            (options, i) => <MenuItem key={i} eventKey={i}>{options.name}</MenuItem>)}
+                        {sortBy.map((options, i) =>
+                            <MenuItem
+                                key={i}
+                                eventKey={i}>{options.name}
+                            </MenuItem>)}
                     </DropdownButton>
                     <DropdownButton
-                        id={"SortOrder"}
+                        id={'SortOrder'}
                         title={selectedSortOrderOption[0].name}
                         onSelect={this.props.onSortOrderChange}>
-                        {sortOrder.map(
-                            (order, i) => <MenuItem key={i} eventKey={i}>{order.name}</MenuItem>)}
+                        {sortOrder.map((order, i) =>
+                            <MenuItem
+                                key={i}
+                                eventKey={i}>{order.name}
+                            </MenuItem>)}
                     </DropdownButton>
                 </Col>
             </Row>

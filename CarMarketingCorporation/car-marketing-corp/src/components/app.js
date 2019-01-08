@@ -20,7 +20,7 @@ export class App extends React.Component {
     render() {
         return (
             <div
-                className="container">
+                className='container'>
                 <div>
                     <Header
                         selectedBrand={this.state.selectedBrand}
@@ -30,13 +30,13 @@ export class App extends React.Component {
                 <div>
                     <Router>
                         <Switch>
-                            <Route exact path="/"
+                            <Route exact path='/'
                                 render={(props) =>
                                     <Body
                                         selectedBrand={this.state.selectedBrand}
                                         {...props} />} />
                             <Route
-                                path="/:id"
+                                path='/:id'
                                 component={Info} />
                         </Switch>
                     </Router>

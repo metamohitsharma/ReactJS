@@ -1,4 +1,4 @@
-import { Button, Modal, Table } from 'react-bootstrap'
+import { Button, Image, Modal, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { metaData } from '../../data/mock-data'
 import Moment from 'react-moment'
@@ -27,13 +27,13 @@ export default class Car extends React.Component {
     handleClose() {
         this.setState({
             show: false
-        });
+        })
     }
 
     handleShow(id) {
         this.setState({
             show: true
-        });
+        })
     }
 
     render() {
@@ -42,23 +42,30 @@ export default class Car extends React.Component {
             <tbody>
                 <tr>
                     <td>
-                        <img src={'data:image/png;base64, ' + car.img} alt="Not Found" width='300' height='200no' />
+                        <Image
+                            src={'data:image/png;base64, ' + car.img}
+                            alt='Not Found'
+                            width='300'
+                            height='200' />
                     </td>
                     <td>
                         <b>{metaData.car.title.label}</b>: {car.title} <br />
                         <b>{metaData.car.description.label}</b>: {car.description} <br />
                         <b>{metaData.car.launchDate.label}</b>:
-                                <Moment
-                            format="MM-DD-YYYY">
+                        <Moment
+                            format='MM-DD-YYYY'>
                             {car.launchDate.toString()}
                         </Moment>
                     </td>
                     <td>
-                        <Button onClick={this.handleShow.bind(this, car.id)}>
+                        <Button
+                            onClick={this.handleShow.bind(this, car.id)}>
                             Details
-                                </Button>
+                        </Button>
                         <br />
-                        <Modal show={this.state.show} onHide={this.handleClose.bind(this)}>
+                        <Modal
+                            show={this.state.show}
+                            onHide={this.handleClose.bind(this)}>
                             <Modal.Header closeButton>
                                 <Modal.Title>{car.title}</Modal.Title>
                             </Modal.Header>
@@ -79,14 +86,17 @@ export default class Car extends React.Component {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <img src={'data:image/png;base64, ' + car.img} alt="Not Found" height='200' />
+                                                <Image
+                                                    src={'data:image/png;base64, ' + car.img}
+                                                    alt='Not Found'
+                                                    height='200' />
                                             </td>
                                             <td>
                                                 {car.description}
                                             </td>
                                             <td>
                                                 <Moment
-                                                    format="MM-DD-YYYY">
+                                                    format='MM-DD-YYYY'>
                                                     {car.launchDate.toString()}
                                                 </Moment>
                                             </td>

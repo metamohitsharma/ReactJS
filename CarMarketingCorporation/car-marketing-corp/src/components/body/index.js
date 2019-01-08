@@ -54,15 +54,14 @@ class Body extends React.Component {
         var carListToBeDisplayed
         if (selectedCars.length === 0) {
             carListToBeDisplayed = (
-                <p>No Car Found having Title "{this.state.searchBy}" :(</p>
+                <p>No Car Found having Title '{this.state.searchBy}' :(</p>
             )
         } else {
             carListToBeDisplayed = (
-                selectedCars.map(
-                    (car, i) =>
-                        <Car
-                            key={i}
-                            car={car} />)
+                selectedCars.map((car, i) =>
+                    <Car
+                        key={i}
+                        car={car} />)
             )
         }
         return (

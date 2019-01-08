@@ -16,16 +16,18 @@ export default class SearchPage extends React.Component {
                 <Form>
                     <FormGroup >
                         <InputGroup>
-                            <InputGroup.Addon><Glyphicon glyph="search" /></InputGroup.Addon>
+                            <InputGroup.Addon>
+                                <Glyphicon glyph='search' />
+                            </InputGroup.Addon>
                             <FormControl
-                                type="text"
-                                placeholder="Search Here"
+                                type='text'
+                                placeholder='Search Here'
                                 onChange={this.handleOnChangeSearch.bind(this)} />
                         </InputGroup>
                     </FormGroup>
                 </Form>
             </Col>
-        );
+        )
     }
 }
 
