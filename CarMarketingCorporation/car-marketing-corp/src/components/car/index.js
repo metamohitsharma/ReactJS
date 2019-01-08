@@ -2,9 +2,21 @@ import { Button, Modal, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { metaData } from '../../data/mock-data'
 import Moment from 'react-moment'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 export default class Car extends React.Component {
+    static propTypes = {
+        car: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            brandId: PropTypes.number.isRequired,
+            img: PropTypes.string,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            launchDate: PropTypes.instanceOf(Date).isRequired
+        })
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -30,7 +42,7 @@ export default class Car extends React.Component {
             <tbody>
                 <tr>
                     <td>
-                        <img src={'data:image/png;base64, ' + car.img} alt="Not Found" height='200' />
+                        <img src={'data:image/png;base64, ' + car.img} alt="Not Found" width='300' height='200no' />
                     </td>
                     <td>
                         <b>{metaData.car.title.label}</b>: {car.title} <br />
@@ -83,7 +95,7 @@ export default class Car extends React.Component {
                                 </Table>
                             </Modal.Body>
                         </Modal>
-                        <Link to={'/' + car.id}>Fore more Information</Link>
+                        <Link to={'/' + car.id}>For more Information</Link>
                     </td>
                 </tr>
             </tbody>

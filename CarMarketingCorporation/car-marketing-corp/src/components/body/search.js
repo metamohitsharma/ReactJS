@@ -1,7 +1,11 @@
 import { Col, InputGroup, Form, FormControl, FormGroup, Glyphicon } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 export default class SearchPage extends React.Component {
+    static propTypes = {
+        onTitleToSearchChange: PropTypes.func.isRequired
+    }
 
     handleOnChangeSearch(event) {
         this.props.onTitleToSearchChange(event.target.value)
