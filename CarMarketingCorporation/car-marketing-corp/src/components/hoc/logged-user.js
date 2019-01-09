@@ -8,7 +8,8 @@ const withLoggedUser = (ChildComponent) => {
         render() {
             return <ChildComponent
                 user={this.state.user}
-                {...this.props} />
+                {...this.props}
+            />
         }
     }
 }

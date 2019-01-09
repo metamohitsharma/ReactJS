@@ -1,5 +1,13 @@
 import Body from './body/index'
+import {
+    brandList,
+    carList,
+    logo,
+    metaData,
+    sortBy
+} from '../data/mock-data'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Col, Grid, Row } from 'react-bootstrap'
 import Header from '../components/header/index'
 import { Info } from '../components/body/info'
 import React from 'react'
@@ -10,6 +18,7 @@ export class App extends React.Component {
         this.state = {
             selectedBrand: 0
         }
+        this.brandChange = this.brandChange.bind(this)
     }
 
     brandChange(eventKey) {
@@ -17,31 +26,52 @@ export class App extends React.Component {
             selectedBrand: eventKey
         })
     }
+
     render() {
         return (
-            <div
-                className='container'>
-                <div>
-                    <Header
-                        selectedBrand={this.state.selectedBrand}
-                        onBrandChange={this.brandChange.bind(this)} />
-                    <hr />
-                </div >
-                <div>
-                    <Router>
-                        <Switch>
-                            <Route exact path='/'
-                                render={(props) =>
-                                    <Body
-                                        selectedBrand={this.state.selectedBrand}
-                                        {...props} />} />
-                            <Route
-                                path='/:id'
-                                component={Info} />
-                        </Switch>
-                    </Router>
-                </div>
-            </div >
+            <Grid>
+                <Row>
+                    <Col>
+                        <Header
+                            brandList={brandList}
+                            logo={logo}
+                            onBrandChange={this.brandChange}
+                            selectedBrand={this.state.selectedBrand}
+                        />
+                        <hr />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Router>
+                            <Switch>
+                                <Route exact path='/'
+                                    render={(props) =>
+                                        <Body
+                                            brandList={brandList}
+                                            carList={carList}
+                                            metaData={metaData}
+                                            selectedBrand={this.state.selectedBrand}
+                                            sortBy={sortBy}
+                                            {...props}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path='/:id'
+                                    render={(props) =>
+                                        <Info
+                                            carList={carList}
+                                            metaData={metaData}
+                                            {...props}
+                                        />
+                                    }
+                                />
+                            </Switch>
+                        </Router>
+                    </Col>
+                </Row>
+            </Grid>
         )
     }
 }

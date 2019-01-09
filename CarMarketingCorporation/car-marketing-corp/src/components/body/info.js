@@ -1,12 +1,24 @@
-import { carList, metaData } from '../../data/mock-data'
 import Moment from 'react-moment'
 import { Image, Table } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 export class Info extends React.Component {
+    static propTypes = {
+        carList: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            brandId: PropTypes.number.isRequired,
+            img: PropTypes.string,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            launchDate: PropTypes.instanceOf(Date).isRequired
+        })),
+        metaData: PropTypes.object.isRequired
+    }
+
     render() {
         const carIdToDisplay = this.props.match.params.id.toString()
-        const car = carList.filter((car, i) =>
+        const car = this.props.carList.find((car, i) =>
             car.id === Number(carIdToDisplay)
         )
         return (
@@ -16,13 +28,13 @@ export class Info extends React.Component {
                         <th>
                         </th>
                         <th>
-                            {metaData.car.title.label}
+                            {this.props.metaData.car.title.label}
                         </th>
                         <th>
-                            {metaData.car.description.label}
+                            {this.props.metaData.car.description.label}
                         </th>
                         <th>
-                            {metaData.car.launchDate.label}
+                            {this.props.metaData.car.launchDate.label}
                         </th>
                     </tr>
                 </thead>
@@ -30,20 +42,20 @@ export class Info extends React.Component {
                     <tr>
                         <td>
                             <Image
-                                src={'data:image/png;base64, ' + car[0].img}
+                                src={'data:image/png;base64, ' + car.img}
                                 alt='Not Found'
-                                height='200' />
+                                height='200'
+                            />
                         </td>
                         <td>
-                            {car[0].title}
+                            {car.title}
                         </td>
                         <td>
-                            {car[0].description}
+                            {car.description}
                         </td>
                         <td>
-                            <Moment
-                                format='MM-DD-YYYY'>
-                                {car[0].launchDate.toString()}
+                            <Moment format='MM-DD-YYYY'>
+                                {car.launchDate.toString()}
                             </Moment>
                         </td>
                     </tr>

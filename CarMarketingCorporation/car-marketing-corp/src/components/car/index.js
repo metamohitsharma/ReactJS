@@ -1,6 +1,5 @@
 import { Button, Image, Modal, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { metaData } from '../../data/mock-data'
 import Moment from 'react-moment'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -14,7 +13,8 @@ export default class Car extends React.Component {
             title: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired,
             launchDate: PropTypes.instanceOf(Date).isRequired
-        })
+        }),
+        metaData: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -46,26 +46,23 @@ export default class Car extends React.Component {
                             src={'data:image/png;base64, ' + car.img}
                             alt='Not Found'
                             width='300'
-                            height='200' />
+                            height='200'
+                        />
                     </td>
                     <td>
-                        <b>{metaData.car.title.label}</b>: {car.title} <br />
-                        <b>{metaData.car.description.label}</b>: {car.description} <br />
-                        <b>{metaData.car.launchDate.label}</b>:
-                        <Moment
-                            format='MM-DD-YYYY'>
+                        <b>{this.props.metaData.car.title.label}</b>: {car.title} <br />
+                        <b>{this.props.metaData.car.description.label}</b>: {car.description} <br />
+                        <b>{this.props.metaData.car.launchDate.label}</b>:
+                        <Moment format='MM-DD-YYYY'>
                             {car.launchDate.toString()}
                         </Moment>
                     </td>
                     <td>
-                        <Button
-                            onClick={this.handleShow.bind(this, car.id)}>
+                        <Button onClick={this.handleShow.bind(this, car.id)}>
                             Details
                         </Button>
                         <br />
-                        <Modal
-                            show={this.state.show}
-                            onHide={this.handleClose.bind(this)}>
+                        <Modal show={this.state.show} onHide={this.handleClose.bind(this)}>
                             <Modal.Header closeButton>
                                 <Modal.Title>{car.title}</Modal.Title>
                             </Modal.Header>
@@ -76,10 +73,10 @@ export default class Car extends React.Component {
                                             <th>
                                             </th>
                                             <th>
-                                                {metaData.car.description.label}
+                                                {this.props.metaData.car.description.label}
                                             </th>
                                             <th>
-                                                {metaData.car.launchDate.label}
+                                                {this.props.metaData.car.launchDate.label}
                                             </th>
                                         </tr>
                                     </thead>
@@ -89,14 +86,14 @@ export default class Car extends React.Component {
                                                 <Image
                                                     src={'data:image/png;base64, ' + car.img}
                                                     alt='Not Found'
-                                                    height='200' />
+                                                    height='200'
+                                                />
                                             </td>
                                             <td>
                                                 {car.description}
                                             </td>
                                             <td>
-                                                <Moment
-                                                    format='MM-DD-YYYY'>
+                                                <Moment format='MM-DD-YYYY'>
                                                     {car.launchDate.toString()}
                                                 </Moment>
                                             </td>

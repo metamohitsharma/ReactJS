@@ -1,5 +1,4 @@
 import Car from '../car/index'
-import { brandList, carList, sortBy, sortOrder } from '../../data/mock-data'
 import { Col, Grid, Row, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -7,163 +6,132 @@ import SearchPage from './search'
 import SortBy from './sort-by'
 import withLoggedUser from '../hoc/logged-user'
 
-const sortByOptions = sortBy.map(
-    (sortOptions) => sortOptions.name)
-const sortOrderOptions = sortOrder.map(
-    (order) => order.name)
+const ASC = 0
+const DSC = 1
 
 class Body extends React.Component {
     static propTypes = {
-        selectedBrand: PropTypes.number.isRequired
+        brandList: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired
+        })).isRequired,
+        carList: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            brandId: PropTypes.number.isRequired,
+            img: PropTypes.string,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            launchDate: PropTypes.instanceOf(Date).isRequired
+        })),
+        metaData: PropTypes.object.isRequired,
+        selectedBrand: PropTypes.number.isRequired,
+        sortBy: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired
+        }))
+    }
+
+    static defaultProps = {
+        selectedBrand: 0
     }
 
     constructor(props) {
         super(props)
         this.state = {
-            sortBy: 0,
-            sortOrder: 0,
-            searchBy: ''
+            searchBy: '',
+            sortField: 0,
+            direction: ASC
+        }
+        this.handleDirection = this.handleDirection.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+        this.handleSort = this.handleSort.bind(this)
+    }
+
+    carToDisplay(carList) {
+        if (carList.length === 0) {
+            return <span>No Car Found having Title '{this.state.searchBy}' :(</span>
+        } else {
+            return carList.map((car, i) =>
+                <Car
+                    key={i}
+                    car={car}
+                    metaData={this.props.metaData}
+                />
+            )
         }
     }
 
-    handleSortOptionChange(eventKey) {
+    handleDirection(eventKey) {
         this.setState({
-            sortBy: eventKey
+            direction: eventKey ? DSC : ASC
         })
     }
 
-    handleSortOrderChange(eventKey) {
+    handleSearch(searchBy) {
         this.setState({
-            sortOrder: eventKey
+            searchBy: searchBy.toLowerCase()
         })
     }
 
-    handleTitleToSearchChange(searchTitle) {
+    handleSort(eventKey) {
         this.setState({
-            searchBy: searchTitle.toLowerCase()
+            sortField: eventKey
+        })
+    }
+
+    sortCar(carList, sortField, direction) {
+        if (direction === 0) {
+            return carList.sort((a, b) => {
+                return a[sortField] < b[sortField] ? -1 : (a[sortField] > b[sortField] ? 1 : 0)
+            })
+        }
+        return carList.sort((a, b) => {
+            return a[sortField] < b[sortField] ? 1 : (a[sortField] > b[sortField] ? -1 : 0)
         })
     }
 
     render() {
-        const brandOpted = brandList.find((brand) =>
+        const brandOpted = this.props.brandList.find((brand) =>
             brand.id === this.props.selectedBrand)
-        const sortedCarList = sortCar(carList, this.state.sortBy, this.state.sortOrder)
-        const selectedCars = sortedCarList
+        const selectedSortField = this.props.sortBy.find((option) =>
+            option.id === this.state.sortField)
+        const selectedCars = this.props.carList
             .filter(car => car.brandId === brandOpted.id)
             .filter(car => car.title.toLowerCase().indexOf(this.state.searchBy) >= 0)
-        var carListToBeDisplayed
-        if (selectedCars.length === 0) {
-            carListToBeDisplayed = (
-                <p>No Car Found having Title '{this.state.searchBy}' :(</p>
-            )
-        } else {
-            carListToBeDisplayed = (
-                selectedCars.map((car, i) =>
-                    <Car
-                        key={i}
-                        car={car} />)
-            )
-        }
+        const sortedCarList = this.sortCar(selectedCars, selectedSortField.name, this.state.direction)
         return (
             <Grid>
-                <Row md={4}>
+                <Row>
                     <Col md={4}>
-                        <b>Welcome {this.props.user}!!</b>
+                        <b>Welcome {this.props.user}!! :)</b>
                         <hr />
                     </Col>
                 </Row>
                 <Row>
                     <Col md={6}>
                         <SortBy
-                            selectedSortBy={this.state.sortBy}
-                            selectedSortOrder={this.state.sortOrder}
-                            onSortOptionChange={this.handleSortOptionChange.bind(this)}
-                            onSortOrderChange={this.handleSortOrderChange.bind(this)} />
+                            direction={this.state.direction}
+                            onDirectionChange={this.handleDirection}
+                            onSortChange={this.handleSort}
+                            selectedSortField={this.state.sortField}
+                            sortBy={this.props.sortBy}
+                        />
                     </Col>
                     <Col md={4} mdOffset={2}>
                         <SearchPage
-                            onTitleToSearchChange={this.handleTitleToSearchChange.bind(this)} />
+                            onSearchChange={this.handleSearch} />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Table striped bordered condensed hover>
-                            {carListToBeDisplayed}
+                            {this.carToDisplay(sortedCarList)}
                         </Table>
                     </Col>
                 </Row>
             </Grid >
         )
-    }
-}
-
-function sortCar(carList, selectedSortByOption, selectedSortOrderOption) {
-    if (sortByOptions[selectedSortByOption] === sortByOptions[0]) {
-        if (sortOrderOptions[selectedSortOrderOption] === sortOrderOptions[0]) {
-            return (carList.sort((a, b) => {
-                if (a.title < b.title) {
-                    return -1
-                }
-                if (a.title > b.title) {
-                    return 1
-                }
-                return 0
-            }))
-        } else {
-            return (carList.sort((a, b) => {
-                if (a.title < b.title) {
-                    return 1
-                }
-                if (a.title > b.title) {
-                    return -1
-                }
-                return 0
-            }))
-        }
-    } else if (sortByOptions[selectedSortByOption] === sortByOptions[1]) {
-        if (sortOrderOptions[selectedSortOrderOption] === sortOrderOptions[0]) {
-            return (carList.sort((a, b) => {
-                if (a.description < b.description) {
-                    return -1
-                }
-                if (a.description > b.description) {
-                    return 1
-                }
-                return 0
-            }))
-        } else {
-            return (carList.sort((a, b) => {
-                if (a.description < b.description) {
-                    return 1
-                }
-                if (a.description > b.description) {
-                    return -1
-                }
-                return 0
-            }))
-        }
-    } else {
-        if (sortOrderOptions[selectedSortOrderOption] === sortOrderOptions[0]) {
-            return (carList.sort((a, b) => {
-                if (a.launchDate < b.launchDate) {
-                    return -1
-                }
-                if (a.launchDate > b.launchDate) {
-                    return 1
-                }
-                return 0
-            }))
-        } else {
-            return (carList.sort((a, b) => {
-                if (a.launchDate < b.launchDate) {
-                    return 1
-                }
-                if (a.launchDate > b.launchDate) {
-                    return -1
-                }
-                return 0
-            }))
-        }
     }
 }
 

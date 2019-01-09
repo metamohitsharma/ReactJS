@@ -1,49 +1,47 @@
-import { Col, DropdownButton, MenuItem, Row } from 'react-bootstrap'
+import { DropdownButton, MenuItem } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { sortBy, sortOrder } from '../../data/mock-data'
 import React from 'react'
 
 export default class SortBy extends React.Component {
     static propTypes = {
-        selectedSortBy: PropTypes.number.isRequired,
-        selectedSortOrder: PropTypes.number.isRequired,
-        onSortOptionChange: PropTypes.func.isRequired,
-        onSortOrderChange: PropTypes.func.isRequired
+        direction: PropTypes.number.isRequired,
+        onDirectionChange: PropTypes.func.isRequired,
+        onSortChange: PropTypes.func.isRequired,
+        selectedSortField: PropTypes.number.isRequired,
+        sortBy: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired
+        }))
     }
 
     render() {
-        const selectedSortByOption = sortBy.filter((sortOption) =>
-            sortOption.id === this.props.selectedSortBy)
-        const selectedSortOrderOption = sortOrder.filter((sortOrderOption) =>
-            sortOrderOption.id === this.props.selectedSortOrder)
+        const selectedSortBy = this.props.sortBy.find((sortOption) =>
+            sortOption.id === this.props.selectedSortField)
         return (
-            <Row>
-                <Col md={2}>
-                    Sort by
-                    </Col>
-                <Col md={8}>
-                    <DropdownButton
-                        id={'SortBy'}
-                        title={selectedSortByOption[0].name}
-                        onSelect={this.props.onSortOptionChange}>
-                        {sortBy.map((options, i) =>
-                            <MenuItem
-                                key={i}
-                                eventKey={i}>{options.name}
-                            </MenuItem>)}
-                    </DropdownButton>
-                    <DropdownButton
-                        id={'SortOrder'}
-                        title={selectedSortOrderOption[0].name}
-                        onSelect={this.props.onSortOrderChange}>
-                        {sortOrder.map((order, i) =>
-                            <MenuItem
-                                key={i}
-                                eventKey={i}>{order.name}
-                            </MenuItem>)}
-                    </DropdownButton>
-                </Col>
-            </Row>
+            <div>
+                <span>Sort By</span>
+                <DropdownButton
+                    id={'SortBy'}
+                    title={selectedSortBy.label}
+                    onSelect={this.props.onSortChange}
+                >
+                    {this.props.sortBy.map((options, i) =>
+                        <MenuItem key={i} eventKey={i}>
+                            {options.label}
+                        </MenuItem>
+                    )}
+                </DropdownButton>
+                <DropdownButton
+                    id={'SortOrder'}
+                    title={this.props.direction ? 'Descending' : 'Ascending'}
+                    onSelect={this.props.onDirectionChange}
+                >
+                    <MenuItem key={0} eventKey={0}>Ascending</MenuItem>
+                    <MenuItem key={1} eventKey={1}>Descending</MenuItem>
+                </DropdownButton>
+            </div>
+
         )
     }
 }

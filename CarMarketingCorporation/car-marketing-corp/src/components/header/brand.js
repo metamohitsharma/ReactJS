@@ -1,31 +1,35 @@
-import { brandList } from '../../data/mock-data'
-import { Col, DropdownButton, MenuItem } from 'react-bootstrap'
+import { DropdownButton, MenuItem } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 export default class Brand extends React.Component {
     static propTypes = {
-        selectedBrand: PropTypes.number.isRequired,
-        onBrandChange: PropTypes.func.isRequired
+        brandList: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired
+        })).isRequired,
+        onBrandChange: PropTypes.func.isRequired,
+        selectedBrand: PropTypes.number.isRequired
     }
 
     render() {
-        const brandName = brandList.filter((brand) =>
+        const brand = this.props.brandList.find((brand) =>
             brand.id === this.props.selectedBrand)
         return (
-            <Col>
+            <div>
                 <span>Brand: </span>
                 <DropdownButton
-                    title={brandName[0].name}
                     id={'Brands'}
-                    onSelect={this.props.onBrandChange}>
-                    {brandList.map((brand, i) =>
-                        <MenuItem
-                            key={i}
-                            eventKey={i}>{brand.name}
-                        </MenuItem>)}
+                    onSelect={this.props.onBrandChange}
+                    title={brand.name}
+                >
+                    {this.props.brandList.map((brand, i) =>
+                        <MenuItem key={i} eventKey={i}>
+                            {brand.name}
+                        </MenuItem>
+                    )}
                 </DropdownButton>
-            </Col >
+            </div>
         )
     }
 }
