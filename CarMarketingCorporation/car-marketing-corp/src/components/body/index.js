@@ -119,8 +119,7 @@ class Body extends React.Component {
                         />
                     </Col>
                     <Col md={4} mdOffset={2}>
-                        <SearchPage
-                            onSearchChange={this.handleSearch} />
+                        <SearchPage onSearchChange={this.handleSearch} />
                     </Col>
                 </Row>
                 <Row>
