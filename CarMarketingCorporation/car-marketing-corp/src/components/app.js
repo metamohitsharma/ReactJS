@@ -45,7 +45,8 @@ export class App extends React.Component {
                     <Col>
                         <Router>
                             <Switch>
-                                <Route exact path='/'
+                                <Route
+                                    exact path='/'
                                     render={(props) =>
                                         <Body
                                             brandList={brandList}

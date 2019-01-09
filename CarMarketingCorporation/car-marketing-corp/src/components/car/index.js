@@ -7,12 +7,12 @@ import React from 'react'
 export default class Car extends React.Component {
     static propTypes = {
         car: PropTypes.shape({
-            id: PropTypes.number.isRequired,
             brandId: PropTypes.number.isRequired,
-            img: PropTypes.string,
-            title: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired,
-            launchDate: PropTypes.instanceOf(Date).isRequired
+            id: PropTypes.number.isRequired,
+            img: PropTypes.string,
+            launchDate: PropTypes.instanceOf(Date).isRequired,
+            title: PropTypes.string.isRequired
         }),
         metaData: PropTypes.object.isRequired
     }
@@ -43,10 +43,10 @@ export default class Car extends React.Component {
                 <tr>
                     <td>
                         <Image
-                            src={'data:image/png;base64, ' + car.img}
                             alt='Not Found'
-                            width='300'
                             height='200'
+                            src={'data:image/png;base64, ' + car.img}
+                            width='300'
                         />
                     </td>
                     <td>
@@ -84,9 +84,9 @@ export default class Car extends React.Component {
                                         <tr>
                                             <td>
                                                 <Image
-                                                    src={'data:image/png;base64, ' + car.img}
                                                     alt='Not Found'
                                                     height='200'
+                                                    src={'data:image/png;base64, ' + car.img}
                                                 />
                                             </td>
                                             <td>

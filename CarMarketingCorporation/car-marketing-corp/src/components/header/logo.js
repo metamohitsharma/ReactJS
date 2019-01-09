@@ -10,10 +10,10 @@ export default class Logo extends React.Component {
     render() {
         return (
             <Image
-                src={'data:image/png;base64,' + this.props.logo}
-                height='100'
                 alt='Not Found'
                 circle
+                height='100'
+                src={'data:image/png;base64,' + this.props.logo}
             />
         )
     }

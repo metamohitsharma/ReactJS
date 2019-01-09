@@ -16,19 +16,19 @@ class Body extends React.Component {
             name: PropTypes.string.isRequired
         })).isRequired,
         carList: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.number.isRequired,
             brandId: PropTypes.number.isRequired,
-            img: PropTypes.string,
-            title: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired,
-            launchDate: PropTypes.instanceOf(Date).isRequired
+            id: PropTypes.number.isRequired,
+            img: PropTypes.string,
+            launchDate: PropTypes.instanceOf(Date).isRequired,
+            title: PropTypes.string.isRequired
         })),
         metaData: PropTypes.object.isRequired,
         selectedBrand: PropTypes.number.isRequired,
         sortBy: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired
+            label: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
         }))
     }
 
@@ -39,9 +39,9 @@ class Body extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            direction: ASC,
             searchBy: '',
-            sortField: 0,
-            direction: ASC
+            sortField: 0
         }
         this.handleDirection = this.handleDirection.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -54,8 +54,8 @@ class Body extends React.Component {
         } else {
             return carList.map((car, i) =>
                 <Car
-                    key={i}
                     car={car}
+                    key={i}
                     metaData={this.props.metaData}
                 />
             )

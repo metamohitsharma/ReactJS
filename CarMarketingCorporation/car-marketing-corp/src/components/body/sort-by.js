@@ -10,8 +10,8 @@ export default class SortBy extends React.Component {
         selectedSortField: PropTypes.number.isRequired,
         sortBy: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired
+            label: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
         }))
     }
 

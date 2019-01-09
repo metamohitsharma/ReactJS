@@ -25,9 +25,9 @@ export default class SearchPage extends React.Component {
                             <Glyphicon glyph='search' />
                         </InputGroup.Addon>
                         <FormControl
-                            type='text'
-                            placeholder='Search Here'
                             onChange={this.handleSearch}
+                            placeholder='Search Here'
+                            type='text'
                         />
                     </InputGroup>
                 </FormGroup>
