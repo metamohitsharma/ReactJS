@@ -16,7 +16,7 @@ export default class Brand extends React.Component {
         const brand = this.props.brandList.find((brand) =>
             brand.id === this.props.selectedBrand)
         return (
-            <div>
+            <React.Fragment>
                 <span>Brand: </span>
                 <DropdownButton
                     id={'Brands'}
@@ -29,7 +29,7 @@ export default class Brand extends React.Component {
                         </MenuItem>
                     )}
                 </DropdownButton>
-            </div>
+            </React.Fragment>
         )
     }
 }

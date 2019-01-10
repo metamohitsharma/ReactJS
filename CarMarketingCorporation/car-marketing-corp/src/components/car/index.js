@@ -58,7 +58,7 @@ export default class Car extends React.Component {
                         </Moment>
                     </td>
                     <td>
-                        <Button onClick={this.handleShow.bind(this, car.id)}>
+                        <Button bsStyle="info" onClick={this.handleShow.bind(this, car.id)} >
                             Details
                         </Button>
                         <br />

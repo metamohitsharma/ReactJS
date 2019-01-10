@@ -19,7 +19,7 @@ export default class SortBy extends React.Component {
         const selectedSortBy = this.props.sortBy.find((sortOption) =>
             sortOption.id === this.props.selectedSortField)
         return (
-            <div>
+            <React.Fragment>
                 <span>Sort By</span>
                 <DropdownButton
                     id={'SortBy'}
@@ -40,8 +40,7 @@ export default class SortBy extends React.Component {
                     <MenuItem key={0} eventKey={0}>Ascending</MenuItem>
                     <MenuItem key={1} eventKey={1}>Descending</MenuItem>
                 </DropdownButton>
-            </div>
-
+            </React.Fragment>
         )
     }
 }

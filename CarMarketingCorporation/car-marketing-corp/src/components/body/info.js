@@ -22,7 +22,7 @@ export class Info extends React.Component {
             car.id === Number(carIdToDisplay)
         )
         return (
-            <div>
+            <React.Fragment>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Cars</Breadcrumb.Item>
                     <Breadcrumb.Item active>{car.title}</Breadcrumb.Item>
@@ -66,7 +66,7 @@ export class Info extends React.Component {
                         </tr>
                     </tbody>
                 </Table>
-            </div>
+            </React.Fragment>
         )
     }
 }
