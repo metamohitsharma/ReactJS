@@ -1,4 +1,4 @@
-import Body from './body/index'
+import Body from './body/index-todo'
 import {
     brandList,
     carList,
@@ -11,14 +11,31 @@ import { Col, Grid, Row } from 'react-bootstrap'
 import Header from '../components/header/index'
 import { Info } from '../components/body/info'
 import React from 'react'
+import TodoDetails from './body/todo-details'
+
+const API = 'https://jsonplaceholder.typicode.com/todos'
 
 export class App extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
-            selectedBrand: 0
+            selectedBrand: 0,
+            data: null
         }
         this.brandChange = this.brandChange.bind(this)
+    }
+
+    componentDidMount() {
+        fetch(API)
+            .then(results => {
+                return results.json()
+            })
+            .then(data => {
+                this.setState({
+                    data: data
+                })
+            })
     }
 
     brandChange(eventKey) {
@@ -43,7 +60,7 @@ export class App extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Router>
+                        {/* <Router>
                             <Switch>
                                 <Route
                                     exact path='/'
@@ -67,6 +84,23 @@ export class App extends React.Component {
                                             {...props}
                                         />
                                     }
+                                />
+                            </Switch>
+                        </Router> */}
+                        <Router>
+                            <Switch>
+                                <Route
+                                    exact path='/'
+                                    render={(props) =>
+                                        <Body
+                                            data={this.state.data}
+                                            {...props}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path='/:id'
+                                    component={TodoDetails}
                                 />
                             </Switch>
                         </Router>
