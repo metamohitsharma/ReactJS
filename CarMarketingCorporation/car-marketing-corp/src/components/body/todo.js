@@ -1,8 +1,17 @@
 import { Glyphicon } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 export default class Todo extends React.Component {
+    static propTypes = {
+        item: PropTypes.shape({
+            completed: PropTypes.bool.isRequired,
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            userId: PropTypes.number.isRequired
+        })
+    }
 
     render() {
         if (this.props.item) {
