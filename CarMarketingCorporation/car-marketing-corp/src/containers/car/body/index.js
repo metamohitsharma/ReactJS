@@ -2,9 +2,9 @@ import Car from '../car/index'
 import { Col, Grid, Row, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import React from 'react'
-import SearchPage from './search'
-import SortBy from './sort-by'
-import withLoggedUser from '../hoc/logged-user'
+import SearchPage from '../../../components/car/body/search'
+import SortBy from '../../../components/car/body/sort-by'
+import withLoggedUser from '../../../hoc/logged-user'
 
 const ASC = 0
 const DSC = 1

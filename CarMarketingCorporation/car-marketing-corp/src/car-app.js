@@ -1,21 +1,18 @@
-import Body from './body/index-todo'
+import Body from './containers/car/body/index'
 import {
     brandList,
     carList,
     logo,
     metaData,
     sortBy
-} from '../data/mock-data'
+} from './data/mock-data'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Col, Grid, Row } from 'react-bootstrap'
-import Header from '../components/header/index'
-import { Info } from '../components/body/info'
+import Header from './components/car/header/index'
+import { Info } from './components/car/body/info'
 import React from 'react'
-import TodoDetails from './body/todo-details'
 
-const API = 'https://jsonplaceholder.typicode.com/todos'
-
-export class App extends React.Component {
+export class CarApp extends React.Component {
 
     constructor(props) {
         super(props)
@@ -24,18 +21,6 @@ export class App extends React.Component {
             data: null
         }
         this.brandChange = this.brandChange.bind(this)
-    }
-
-    componentDidMount() {
-        fetch(API)
-            .then(results => {
-                return results.json()
-            })
-            .then(data => {
-                this.setState({
-                    data: data
-                })
-            })
     }
 
     brandChange(eventKey) {
@@ -60,7 +45,7 @@ export class App extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        {/* <Router>
+                        <Router>
                             <Switch>
                                 <Route
                                     exact path='/'
@@ -84,23 +69,6 @@ export class App extends React.Component {
                                             {...props}
                                         />
                                     }
-                                />
-                            </Switch>
-                        </Router> */}
-                        <Router>
-                            <Switch>
-                                <Route
-                                    exact path='/'
-                                    render={(props) =>
-                                        <Body
-                                            data={this.state.data}
-                                            {...props}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path='/:id'
-                                    component={TodoDetails}
                                 />
                             </Switch>
                         </Router>

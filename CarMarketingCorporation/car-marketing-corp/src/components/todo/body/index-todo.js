@@ -3,7 +3,7 @@ import './index.css'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Todo from './todo';
-import withTodoList from '../hoc/todo-list'
+import withTodoList from '../../../hoc/todo-list'
 
 class Body extends React.Component {
     static propTypes = {
