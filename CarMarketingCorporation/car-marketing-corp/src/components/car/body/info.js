@@ -1,5 +1,5 @@
-import Moment from 'react-moment'
 import { Breadcrumb, Image, Table } from 'react-bootstrap'
+import Moment from 'react-moment'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -24,7 +24,7 @@ export class Info extends React.Component {
         return (
             <React.Fragment>
                 <Breadcrumb>
-                    <Breadcrumb.Item href="/">Cars</Breadcrumb.Item>
+                    <Breadcrumb.Item href='/car/'>Cars</Breadcrumb.Item>
                     <Breadcrumb.Item active>{car.title}</Breadcrumb.Item>
                 </Breadcrumb>
                 <Table striped bordered condensed hover>

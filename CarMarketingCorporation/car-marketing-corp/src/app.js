@@ -1,22 +1,33 @@
+import './app.css'
+import { car, todo } from './data/mock-data'
+import { Col, Grid, Image, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import React from 'react'
-import { Col, Grid, Row, Tab, Tabs } from 'react-bootstrap'
-import { CarApp } from './car-app';
-import { TodoApp } from './todo-app';
 
 export default class App extends React.Component {
     render() {
         return (
             <Grid>
                 <Row>
-                    <Col>
-                        <Tabs defaultActiveKey={1} id='uncontrolled-tab-example' bsStyle='pills'>
-                            <Tab eventKey={1} title='Car Marketing'>
-                                <CarApp />
-                            </Tab>
-                            <Tab eventKey={2} title='Todo'>
-                                <TodoApp />
-                            </Tab>
-                        </Tabs>
+                    <Col md={6}>
+                        <Link to='/car'>
+                            <div class='card'>
+                                <Image src={'data:image/png;base64, ' + car} alt='Avatar' height='300px' />
+                                <div class='container'>
+                                    <h3><b>Car Marketing App</b></h3>
+                                </div>
+                            </div>
+                        </Link>
+                    </Col>
+                    <Col md={6}>
+                        <Link to='/todo'>
+                            <div class='card' >
+                                <Image src={'data:image/png;base64, ' + todo} alt='Avatar' height='300px' />
+                                <div class='container'>
+                                    <h3><b>Todo App</b></h3>
+                                </div>
+                            </div>
+                        </Link>
                     </Col>
                 </Row>
             </Grid>

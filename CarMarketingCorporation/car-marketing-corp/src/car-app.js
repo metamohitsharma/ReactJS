@@ -6,8 +6,8 @@ import {
     metaData,
     sortBy
 } from './data/mock-data'
+import { Breadcrumb, Col, Grid, Row } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Col, Grid, Row } from 'react-bootstrap'
 import Header from './components/car/header/index'
 import { Info } from './components/car/body/info'
 import React from 'react'
@@ -33,6 +33,12 @@ export class CarApp extends React.Component {
         return (
             <Grid>
                 <Row>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Car Marketing App</Breadcrumb.Item>
+                    </Breadcrumb>
+                </Row>
+                <Row>
                     <Col>
                         <Header
                             brandList={brandList}
@@ -48,7 +54,7 @@ export class CarApp extends React.Component {
                         <Router>
                             <Switch>
                                 <Route
-                                    exact path='/'
+                                    exact path='/car/'
                                     render={(props) =>
                                         <Body
                                             brandList={brandList}
@@ -61,7 +67,7 @@ export class CarApp extends React.Component {
                                     }
                                 />
                                 <Route
-                                    path='/:id'
+                                    path='/car/:id'
                                     render={(props) =>
                                         <Info
                                             carList={carList}

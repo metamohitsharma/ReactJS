@@ -17,8 +17,8 @@ export default class Todo extends React.Component {
         if (this.props.item) {
             let button
             this.props.item.completed
-                ? button = <span className='glyph-color-ok'><Glyphicon glyph="ok" /></span>
-                : button = <span className='glyph-color-remove'><Glyphicon glyph="remove" /></span>
+                ? button = <span className='glyph-color-ok'><Glyphicon glyph='ok' /></span>
+                : button = <span className='glyph-color-remove'><Glyphicon glyph='remove' /></span>
             return (
                 <tr>
                     <td>
@@ -31,7 +31,7 @@ export default class Todo extends React.Component {
                         {button}
                     </td>
                     <td>
-                        <Link to={'/' + this.props.item.id}>For More Details</Link>
+                        <Link to={'/todo/' + this.props.item.id}>For More Details</Link>
                     </td>
                 </tr>)
         }

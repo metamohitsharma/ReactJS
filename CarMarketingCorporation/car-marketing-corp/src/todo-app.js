@@ -1,6 +1,6 @@
 import Body from './components/todo/body/index-todo'
+import { Breadcrumb, Col, Grid, Row } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Col, Grid, Row } from 'react-bootstrap'
 import React from 'react'
 import TodoDetails from './containers/todo/body/todo-details'
 
@@ -31,11 +31,17 @@ export class TodoApp extends React.Component {
         return (
             <Grid>
                 <Row>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Todo App</Breadcrumb.Item>
+                    </Breadcrumb>
+                </Row>
+                <Row>
                     <Col>
                         <Router>
                             <Switch>
                                 <Route
-                                    exact path='/'
+                                    exact path='/todo/'
                                     render={(props) =>
                                         <Body
                                             data={this.state.data}
@@ -44,7 +50,7 @@ export class TodoApp extends React.Component {
                                     }
                                 />
                                 <Route
-                                    path='/:id'
+                                    path='/todo/:id'
                                     component={TodoDetails}
                                 />
                             </Switch>

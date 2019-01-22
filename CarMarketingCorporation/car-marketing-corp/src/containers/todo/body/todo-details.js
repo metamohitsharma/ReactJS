@@ -28,8 +28,8 @@ export default class TodoDetails extends React.Component {
         if (this.state.item) {
             let button
             this.state.item.completed
-                ? button = <span className='glyph-color-ok'><Glyphicon glyph="ok" /></span>
-                : button = <span className='glyph-color-remove'><Glyphicon glyph="remove" /></span>
+                ? button = <span className='glyph-color-ok'><Glyphicon glyph='ok' /></span>
+                : button = <span className='glyph-color-remove'><Glyphicon glyph='remove' /></span>
             return (
                 <Table striped bordered condensed hover>
                     <tbody>
